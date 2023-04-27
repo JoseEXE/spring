@@ -1,0 +1,89 @@
+
+<div th:replace="headerfooter/header::header"></div>
+
+
+<!-- 
+<header th:insert="headerfooter/header::header"></header>
+<header th:insert="~{headerfooter/header::header}"></header>
+ -->
+ 
+
+      
+      
+        <h1>Formulaire creation d'employée</h1>
+     
+        <div class="container">
+			<form  method="post"  th:object="${employes}">
+			  <div class="mb-3">
+			    <label for="exampleInputEmail1" class="form-label">Nom:</label>
+			    <input type="text" class="form-control" id="nom" th:field="*{nom}" aria-describedby="emailHelp">
+			    <div id="emailHelp" class="form-text"></div>
+			  </div>
+			  <div class="mb-3">
+			    <label for="exampleInputEmail1" class="form-label">Prenom:</label>
+			    <input type="text" class="form-control" id="prenom" th:field="*{prenom}" aria-describedby="emailHelp">
+			    <div id="emailHelp" class="form-text"></div>
+			  </div>
+			  <div class="mb-3">
+			    <label for="exampleInputEmail1" class="form-label">tel:</label>
+			    <input type="text" class="form-control" id="tel" th:field="*{tel}"  aria-describedby="emailHelp">
+			    <div id="emailHelp" class="form-text"></div>
+			  </div>
+			  <div class="mb-3">
+			    <label for="exampleInputEmail1" class="form-label">Email:</label>
+			    <input type="email" class="form-control"  id="email" th:field="*{email}" aria-describedby="emailHelp">
+			   
+			    <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+			   
+			    <div id="emailHelp" class="form-text"></div>
+			  </div>
+			  <button type="submit" class="btn btn-primary">Submit</button>
+			</form>
+							
+
+				
+        </div>
+<br><hr>
+
+
+ <h2>Tableau de employés</h2>
+        <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nom</th>
+      <th scope="col">Prenom</th>
+      <th scope="col">Tel</th>
+      <th scope="col">Email</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+            <th:block th:each="employe : ${employesList}">
+            <tr>
+			 <td th:utext="${employe.id}"></td>
+             <td th:utext="${employe.nom}"></td>
+             <td th:utext="${employe.prenom}"></td>
+             <td th:utext="${employe.tel}"></td>
+              <td th:utext="${employe.email}"></td>
+              
+              <td> <a th:href="@{/update/{id} (id= ${employe.id})}"><i class="bi bi-clipboard"></i>Editer</a> </td>
+              
+              
+              <td> <a th:href="@{/delete/{id} (id= ${employe.id})}"><i class="bi bi-trash"></i>Delete</a> </td>
+              
+             <!--  
+            <td><a th:href="'/update/' + ${etudiant.id}"><i class="bi bi-clipboard"></i></a></td>
+            <td><a th:href="'/delete/' + ${etudiant.id}"><i class="bi bi-trash"></i></a></td>
+             -->
+            </tr>
+              </th:block>
+
+
+  </tbody>
+</table>
+
+        
+<div th:replace="headerfooter/footer::footer"></div>
+</html>
